@@ -6,6 +6,7 @@ const dead = document.getElementById('dead');
 const enemy = document.getElementById('enemy');
 const again = document.getElementById('again');
 const header = document.querySelector('.header');
+let noClick = true;
 
 const game = {
     ships: [
@@ -66,7 +67,7 @@ const show = {
 
 const fire = (event) => {
     const target = event.target;
-    if (target.tagName !== 'TD' || target.classList.length > 0) return;
+    if (target.tagName !== 'TD' || target.classList.length > 0 || !noClick) return;
     show.miss(target);
     play.updata = 'shot';
 
@@ -85,6 +86,7 @@ const fire = (event) => {
                 }
                 game.shipCount -= 1;
                 if (game.shipCount < 1) {
+                    noClick = false;
                     header.textContent = 'game over';
                     header.style.color = 'red';
 
